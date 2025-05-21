@@ -9,6 +9,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<CommunityPage />} />
+      <Route path="/community" element={<CommunityPage />} />
       <Route path="/communities" element={<CommunitiesPage />} />
       <Route path="/community/:communityId" element={<CommunityDetail />} />
       <Route path="/community/project/:projectId" element={<ProjectDetail />} />

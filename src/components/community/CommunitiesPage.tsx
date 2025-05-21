@@ -92,11 +92,11 @@ const CommunitiesPage: React.FC = () => {
             <Link 
               to={`/community/${community.id}`} 
               key={community.id}
-              className="block"
+              className="block h-full"
               onMouseEnter={() => setHoveredCommunity(community.id)}
               onMouseLeave={() => setHoveredCommunity(null)}
             >
-              <div className={`bg-white border ${hoveredCommunity === community.id ? 'border-blue-300 shadow-md' : 'border-gray-200'} rounded-lg overflow-hidden transition-all duration-200`}>
+              <div className={`bg-white border ${hoveredCommunity === community.id ? 'border-blue-300 shadow-md' : 'border-gray-200'} rounded-lg overflow-hidden transition-all duration-200 h-full flex flex-col`}>
                 {/* Community header with gradient background */}
                 <div className="h-24 bg-gradient-to-r from-blue-500 to-indigo-600 relative">
                   <div className="absolute -bottom-10 left-6">
@@ -112,7 +112,7 @@ const CommunitiesPage: React.FC = () => {
                 </div>
                 
                 {/* Community content */}
-                <div className="pt-12 px-6 pb-6">
+                <div className="pt-12 px-6 pb-6 flex flex-col flex-grow">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-semibold text-gray-900">{community.name}</h3>
                     <ChevronRight className={`h-5 w-5 text-gray-400 transition-transform ${hoveredCommunity === community.id ? 'transform translate-x-1' : ''}`} />
@@ -122,7 +122,7 @@ const CommunitiesPage: React.FC = () => {
                     {community.description}
                   </p>
                   
-                  <div className="flex items-center justify-between mt-6">
+                  <div className="flex items-center justify-between mt-auto pt-6">
                     <div className="flex space-x-4">
                       <div className="flex items-center text-gray-600">
                         <Users className="h-4 w-4 mr-1" />

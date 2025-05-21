@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { AuthButtons } from '../navigation'
 import logo from '../../assets/logo.svg'
@@ -9,6 +9,7 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState<'community' | 'communities' | 'openspaces'>('community');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Set active tab based on current route
   useEffect(() => {
@@ -42,6 +43,20 @@ export const Navbar: React.FC = () => {
     };
   }, [scrolled]);
 
+  // Handle tab click
+  const handleTabClick = (tab: 'community' | 'communities' | 'openspaces') => {
+    setActiveTab(tab);
+    
+    // Navigate to the appropriate route
+    if (tab === 'community') {
+      navigate('/community');
+    } else if (tab === 'communities') {
+      navigate('/communities');
+    } else if (tab === 'openspaces') {
+      navigate('/open-spaces');
+    }
+  };
+
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -59,44 +74,41 @@ export const Navbar: React.FC = () => {
               
               <nav className="hidden md:ml-10 md:flex">
                 <div className="flex items-center">
-                  <Link 
-                    to="/community" 
+                  <button 
                     className={`flex items-center px-4 py-2 text-base font-medium transition-all duration-200 border-b-2 ${
                       activeTab === 'community' 
                         ? 'text-black border-blue-500' 
                         : 'text-gray-500 border-transparent hover:text-gray-900'
                     }`}
-                    onClick={() => setActiveTab('community')}
+                    onClick={() => handleTabClick('community')}
                   >
                     <Users className="mr-2 h-5 w-5" />
                     Community
-                  </Link>
+                  </button>
                   
-                  <Link 
-                    to="/communities" 
+                  <button 
                     className={`flex items-center px-4 py-2 text-base font-medium transition-all duration-200 border-b-2 ${
                       activeTab === 'communities' 
                         ? 'text-black border-blue-500' 
                         : 'text-gray-500 border-transparent hover:text-gray-900'
                     }`}
-                    onClick={() => setActiveTab('communities')}
+                    onClick={() => handleTabClick('communities')}
                   >
                     <Users className="mr-2 h-5 w-5" />
                     Communities
-                  </Link>
+                  </button>
                   
-                  <Link 
-                    to="/open-spaces" 
+                  <button 
                     className={`flex items-center px-4 py-2 text-base font-medium transition-all duration-200 border-b-2 ${
                       activeTab === 'openspaces' 
                         ? 'text-black border-blue-500' 
                         : 'text-gray-500 border-transparent hover:text-gray-900'
                     }`}
-                    onClick={() => setActiveTab('openspaces')}
+                    onClick={() => handleTabClick('openspaces')}
                   >
                     <CircleDot className="mr-2 h-5 w-5" />
                     Open Spaces
-                  </Link>
+                  </button>
                 </div>
               </nav>
             </div>
